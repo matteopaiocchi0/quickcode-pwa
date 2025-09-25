@@ -2,11 +2,11 @@
 
 🌐 **Progressive Web App per la generazione di password con utente fisso**
 
-[![Deploy to GitHub Pages](https://github.com/USERNAME/quickcode-pwa/workflows/Deploy%20QuickCode%20PWA%20to%20GitHub%20Pages/badge.svg)](https://github.com/USERNAME/quickcode-pwa/actions)
+[![Deploy to GitHub Pages](https://github.com/matteopaiocchi0/quickcode-pwa/workflows/Deploy%20QuickCode%20PWA%20to%20GitHub%20Pages/badge.svg)](https://github.com/matteopaiocchi0/quickcode-pwa/actions)
 
 ## 🚀 Live Demo
 
-**📱 [Apri QuickCode PWA](https://USERNAME.github.io/quickcode-pwa/)**
+**📱 [Apri QuickCode PWA](https://matteopaiocchi0.github.io/quickcode-pwa/)**
 
 ## ✨ Caratteristiche
 
@@ -21,18 +21,18 @@
 ## 📱 Installazione PWA
 
 ### **iPhone (Safari)**
-1. Apri [QuickCode PWA](https://USERNAME.github.io/quickcode-pwa/) in Safari
+1. Apri [QuickCode PWA](https://matteopaiocchi0.github.io/quickcode-pwa/) in Safari
 2. Tocca il pulsante **"Condividi"** (📤)
 3. Seleziona **"Aggiungi alla schermata Home"**
 4. L'app appare come icona nativa
 
 ### **Android (Chrome)**
-1. Apri [QuickCode PWA](https://USERNAME.github.io/quickcode-pwa/) in Chrome
+1. Apri [QuickCode PWA](https://matteopaiocchi0.github.io/quickcode-pwa/) in Chrome
 2. Tocca il menu (⋮) → **"Aggiungi alla schermata Home"**
 3. L'app appare come icona nativa
 
 ### **Desktop (Chrome/Edge)**
-1. Apri [QuickCode PWA](https://USERNAME.github.io/quickcode-pwa/) in Chrome/Edge
+1. Apri [QuickCode PWA](https://matteopaiocchi0.github.io/quickcode-pwa/) in Chrome/Edge
 2. Clicca sull'icona **"Installa"** nella barra degli indirizzi
 3. L'app si apre come finestra separata
 
