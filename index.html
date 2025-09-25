@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCode PC — PWA</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="QuickCode PC - Generatore password con utente fisso">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .user-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .user-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .user-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .user-label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .user-value {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            transition: border-color 0.2s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .result {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .result-label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .result-value {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-right: 8px;
+        }
+        
+        .btn-copy {
+            background: #28a745;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .btn-copy:hover {
+            background: #218838;
+        }
+        
+        .alert {
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 10px;
+            margin-top: 16px;
+        }
+        
+        .install-prompt {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .install-prompt button {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .install-prompt p {
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>QuickCode PC</h1>
+            <p>PWA per GitHub Pages</p>
+        </div>
+        
+        <div id="installPrompt" class="install-prompt" style="display: none;">
+            <p>📱 Installa come app per accesso rapido</p>
+            <button onclick="installApp()">Installa App</button>
+        </div>
+        
+        <div class="user-info">
+            <div class="user-row">
+                <span class="user-label">Utente (fisso):</span>
+                <span class="user-value">630620</span>
+            </div>
+            <div class="user-row">
+                <span class="user-label">Nuovo utente:</span>
+                <span class="user-value">430620</span>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <label for="randomId">Random ID (6 cifre)</label>
+            <input type="text" id="randomId" placeholder="123456" maxlength="6">
+        </div>
+        
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="generatePassword()">Genera Password</button>
+            <button class="btn btn-secondary" onclick="clearAll()">Pulisci</button>
+        </div>
+        
+        <div class="result">
+            <div class="result-row">
+                <span class="result-label">Password:</span>
+                <span class="result-value" id="passwordResult">—</span>
+                <button class="btn-copy" onclick="copyPassword()">Copia</button>
+            </div>
+        </div>
+        
+        <div id="alertContainer"></div>
+        
+        <div class="footer">
+            <p>Algoritmo: Password = Random ID XOR 233112</p>
+            <p>Tutto locale - nessun dato inviato</p>
+        </div>
+    </div>
+
+    <script>
+        // Costanti fisse
+        const FIXED_XOR = 233112;
+        let deferredPrompt;
+        
+        function pad6(n) {
+            const s = n.toString();
+            return s.padStart(6, '0');
+        }
+        
+        function showAlert(message, type = 'success') {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            container.innerHTML = '';
+            container.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+        
+        function generatePassword() {
+            const randomId = document.getElementById('randomId').value;
+            
+            if (!randomId || randomId.length !== 6) {
+                showAlert('Inserisci un Random ID di 6 cifre', 'error');
+                return;
+            }
+            
+            if (!/^\d{6}$/.test(randomId)) {
+                showAlert('Random ID deve contenere solo numeri', 'error');
+                return;
+            }
+            
+            try {
+                // Calcolo password (algoritmo fisso)
+                const randomIdNum = parseInt(randomId);
+                const password = randomIdNum ^ FIXED_XOR;
+                const passwordStr = pad6(password);
+                
+                document.getElementById('passwordResult').textContent = passwordStr;
+                showAlert('Password generata con successo!');
+                
+            } catch (error) {
+                showAlert('Errore nella generazione: ' + error.message, 'error');
+            }
+        }
+        
+        function clearAll() {
+            document.getElementById('randomId').value = '';
+            document.getElementById('passwordResult').textContent = '—';
+        }
+        
+        function copyPassword() {
+            const password = document.getElementById('passwordResult').textContent;
+            if (password && password !== '—') {
+                navigator.clipboard.writeText(password).then(() => {
+                    showAlert(`'${password}' copiato negli appunti!`);
+                }).catch(() => {
+                    showAlert('Errore nella copia', 'error');
+                });
+            }
+        }
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showAlert('App installata con successo!');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+        
+        // PWA Install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'block';
+        });
+        
+        // Enter key support
+        document.getElementById('randomId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generatePassword();
+            }
+        });
+        
+        // Focus automatico
+        document.getElementById('randomId').focus();
+        
+        // Service Worker registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then((registration) => {
+                    console.log('SW registered: ', registration);
+                })
+                .catch((registrationError) => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        }
+    </script>
+</body>
+</html>

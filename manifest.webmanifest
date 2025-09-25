@@ -1,0 +1,28 @@
+{
+  "name": "QuickCode PC",
+  "short_name": "QuickCode",
+  "description": "Generatore password con utente fisso",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "it",
+  "scope": "./",
+  "id": "quickcode-pc-pwa"
+}
